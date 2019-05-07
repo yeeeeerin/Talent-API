@@ -1,0 +1,6 @@
+rootProject.name = 'talent'
+
+include 'webapp'
+include 'auth'
+include 'core'
+

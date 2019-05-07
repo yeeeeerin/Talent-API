@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
+    }
+}
+
+
+subprojects {
+    group 'talent.com'
+    version = '0.0.1-SNAPSHOT'
+
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+        compile group: 'com.auth0', name: 'java-jwt', version: '3.7.0'
+
+        //test
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        //default setting
+        compile group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
+
+    }
+}
+
+
+project(':auth') {
+    dependencies {
+        compile project(':core')
+    }
+}
+
+
+project(':webapp') {
+    dependencies {
+        compile project(':core')
+    }
+}
